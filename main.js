@@ -3,13 +3,16 @@ var gl;
 
 var refreshRate = 30;
 
+var render;
+
 function tick()
 {
+	render.tick();
 }
 
 function draw()
 {
-	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+	render.draw();
 }
 
 window.onload = function()
@@ -27,6 +30,8 @@ window.onload = function()
 	gl.clearDepth(1.0);
 	gl.enable(gl.DEPTH_TEST);
 	gl.depthFunc(gl.LEQUAL);
+	
+	render = new Render(gl);
 	
 	setInterval(tick, 1000/refreshRate);
 	setInterval(draw, 1000/refreshRate);
