@@ -3,7 +3,7 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 	this.gl = gl;
 	
 	this.vertexShaderCode = vertexShaderCode;
-	this.fregmentShaderCode = fragmentShaderCode;
+	this.fragmentShaderCode = fragmentShaderCode;
 	
 	this.vertexShader = null;
 	this.fragmentShader = null;
@@ -18,24 +18,27 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 		this.vertexShader = new Shader(this.gl, this.vertexShaderCode, this.gl.VERTEX_SHADER);
 		this.fragmentShader = new Shader(this.gl, this.fragmentShaderCode, this.gl.FRAGMENT_SHADER);
 		
+		this.vertexShader.create();
+		this.fragmentShader.create();
+		
 		this.shaderProgram = this.gl.createProgram();
 		this.gl.attachShader(this.shaderProgram, this.vertexShader.shader);
 		this.gl.attachShader(this.shaderProgram, this.fragmentShader.shader);
 		this.gl.linkProgram(this.shaderProgram);
 
-		if (!this.gl.getProgramParameter(shaderProgram, gl.LINK_STATUS))
+		if (!this.gl.getProgramParameter(this.shaderProgram, gl.LINK_STATUS))
 		{
 			alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
 			return null;
 		}
 	}
 	
-	this.addAttribute(name)
+	this.addAttribute = function(name)
 	{
 		attributeLocations.set(name, this.gl.getAttribLocation(this.shaderProgram, name));
 	}
 	
-	this.addUniform(name)
+	this.addUniform = function(name)
 	{
 		uniformLocations.set(name, this.gl.getUniformLocation(this.shaderProgram, name));
 	}

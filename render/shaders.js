@@ -18,5 +18,5 @@ var fsSource =
 
 "void main()" +
 "{" +
-"gl_FragColor = vColor;" +
+	"gl_FragColor = vColor;" +
 "}";

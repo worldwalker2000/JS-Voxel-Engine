@@ -32,6 +32,7 @@ window.onload = function()
 	gl.depthFunc(gl.LEQUAL);
 	
 	render = new Render(gl);
+	render.init();
 	
 	setInterval(tick, 1000/refreshRate);
 	setInterval(draw, 1000/refreshRate);
