@@ -10,6 +10,9 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 	
 	this.shaderProgram = null;
 	
+	this.attributeLocations = new Map();
+	this.uniformLocations = new Map();
+	
 	this.create = function()
 	{
 		this.vertexShader = new Shader(this.gl, this.vertexShaderCode, this.gl.VERTEX_SHADER);
@@ -25,5 +28,15 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 			alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
 			return null;
 		}
+	}
+	
+	this.addAttribute(name)
+	{
+		attributeLocations.set(name, this.gl.getAttribLocation(this.shaderProgram, name));
+	}
+	
+	this.addUniform(name)
+	{
+		uniformLocations.set(name, this.gl.getUniformLocation(this.shaderProgram, name));
 	}
 }
