@@ -7,6 +7,12 @@ function Render(gl)
 	this.init = function()
 	{
 		this.shaderProgram.create();
+		this.shaderProgram.addAttribute("aVertexPosition");
+		this.shaderProgram.addAttribute("aVertexColor");
+		
+		this.shaderProgram.addUniform("uProjectionMatrix");
+		this.shaderProgram.addUniform("uModelViewMatrix");
+		this.shaderProgram.addUniform("uModelViewMatrix");
 	}
 	
 	this.draw = function()

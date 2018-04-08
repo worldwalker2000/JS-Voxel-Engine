@@ -35,11 +35,11 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 	
 	this.addAttribute = function(name)
 	{
-		attributeLocations.set(name, this.gl.getAttribLocation(this.shaderProgram, name));
+		this.attributeLocations.set(name, this.gl.getAttribLocation(this.shaderProgram, name));
 	}
 	
 	this.addUniform = function(name)
 	{
-		uniformLocations.set(name, this.gl.getUniformLocation(this.shaderProgram, name));
+		this.uniformLocations.set(name, this.gl.getUniformLocation(this.shaderProgram, name));
 	}
 }
