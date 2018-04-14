@@ -1,11 +1,11 @@
 var vsSource =
 "attribute vec4 aVertexPosition;" +
-"attribute vec4 aVertexColor;" +
+"attribute vec4 aTextureCorrds;" +
 
 "uniform mat4 uModelViewMatrix;" +
 "uniform mat4 uProjectionMatrix;" +
 
-"varying lowp vec4 vColor;" +
+"varying lowp vec4 vTextureCords;" +
 
 "void main()" +
 "{" +
@@ -14,9 +14,9 @@ var vsSource =
 "}";
 
 var fsSource =
-"varying lowp vec4 vColor;" +
+"varying lowp vec4 vTextureCords;" +
 
 "void main()" +
 "{" +
-	"gl_FragColor = vColor;" +
+	"gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);" +
 "}";

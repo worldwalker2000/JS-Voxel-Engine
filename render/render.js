@@ -8,7 +8,7 @@ function Render(gl)
 	{
 		this.shaderProgram.create();
 		this.shaderProgram.addAttribute("aVertexPosition");
-		this.shaderProgram.addAttribute("aVertexColor");
+		this.shaderProgram.addAttribute("aTextureCorrds");
 		
 		this.shaderProgram.addUniform("uProjectionMatrix");
 		this.shaderProgram.addUniform("uModelViewMatrix");
