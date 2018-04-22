@@ -1,5 +1,5 @@
 var vsSource =
-"attribute vec4 aVertexPosition;" +
+"attribute vec3 aVertexPosition;" +
 "attribute vec4 aTextureCorrds;" +
 
 "uniform mat4 uModelViewMatrix;" +
@@ -9,8 +9,10 @@ var vsSource =
 
 "void main()" +
 "{" +
-	"gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;" +
-	"vColor = aVertexColor;" +
+	"gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);" +
+	//"gl_Position = vec4(aVertexPosition, 1.0);" +
+	//"gl_Position = vec4(0.0, 0.0, -1.0, 1.0);" +
+	"vTextureCords = aTextureCorrds;" +
 "}";
 
 var fsSource =
