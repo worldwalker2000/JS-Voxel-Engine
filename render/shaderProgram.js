@@ -26,9 +26,9 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 		this.gl.attachShader(this.shaderProgram, this.fragmentShader.shader);
 		this.gl.linkProgram(this.shaderProgram);
 
-		if (!this.gl.getProgramParameter(this.shaderProgram, gl.LINK_STATUS))
+		if (!this.gl.getProgramParameter(this.shaderProgram, this.gl.LINK_STATUS))
 		{
-			alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
+			alert('Unable to initialize the shader program: ' + this.gl.getProgramInfoLog(shaderProgram));
 			return null;
 		}
 	}

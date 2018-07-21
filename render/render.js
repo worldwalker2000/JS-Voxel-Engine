@@ -15,7 +15,6 @@ function Render(gl, vaoext)
 		
 		this.shaderProgram.addUniform("uProjectionMatrix");
 		this.shaderProgram.addUniform("uModelViewMatrix");
-		this.shaderProgram.addUniform("uModelViewMatrix");
 		
 		this.testMesh.create(this.shaderProgram);
 	}
@@ -28,7 +27,7 @@ function Render(gl, vaoext)
 		
 		this.vaoext.bindVertexArrayOES(this.testMesh.vao);
 		
-		const fieldOfView = 45 * Math.PI / 180;
+		const fieldOfView = 90 * Math.PI / 180;
 		const aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
 		const zNear = 0.1;
 		const zFar = 100.0;
@@ -45,12 +44,15 @@ function Render(gl, vaoext)
 
 		mat4.translate(modelViewMatrix,
 						modelViewMatrix,
-						[-0.0, 0.0, -6.0]);
+						[0.0, 0.0, -5.0]);
 						
-		gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uProjectionMatrix"), false, projectionMatrix);
-		gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelViewMatrix"), false, modelViewMatrix);
+		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uProjectionMatrix"), false, projectionMatrix);
+		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelViewMatrix"), false, modelViewMatrix);
 		
-		gl.drawElements(gl.TRIANGLES, this.testMesh.indexs.length, gl.UNSIGNED_SHORT, 0);
+		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aVertexPosition"));
+		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aTextureCorrds"));
+		
+		this.gl.drawElements(this.gl.TRIANGLES, this.testMesh.indexs.length, this.gl.UNSIGNED_SHORT, 0);
 	}
 	
 	this.tick = function()

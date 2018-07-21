@@ -36,6 +36,6 @@ function Mesh(gl, vaoext, verts, texcords, indexs)
 
 		this.indexBuffer = this.gl.createBuffer();
 		this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-		this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, new Float32Array(this.indexs), this.gl.STATIC_DRAW);
+		this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexs), this.gl.STATIC_DRAW);
 	}
 }

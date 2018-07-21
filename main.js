@@ -31,7 +31,7 @@ window.onload = function()
 	//oes_vao_ext.bindVertexArrayOES(vao);
 	
 	gl.clearColor(100/255, 149/255, 237/255, 1.0);
-	gl.clearDepth(1.0);
+	//gl.clearDepth(1.0);
 	gl.enable(gl.DEPTH_TEST);
 	gl.depthFunc(gl.LEQUAL);
 	
