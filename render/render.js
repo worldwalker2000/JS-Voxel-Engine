@@ -7,6 +7,8 @@ function Render(gl, vaoext)
 	
 	this.testMesh = new Mesh(this.gl, this.vaoext, [0.0, 0.5, 0.0, 0.5, -0.5, 0.0, -0.5, -0.5, 0.0,], [0, 0, 0, 0, 0, 0,], [0, 1, 2]);
 	
+	this.tickCount = 0;
+
 	this.init = function()
 	{
 		this.shaderProgram.create();
@@ -27,25 +29,19 @@ function Render(gl, vaoext)
 		
 		this.vaoext.bindVertexArrayOES(this.testMesh.vao);
 		
-		const fieldOfView = 90 * Math.PI / 180;
-		const aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
-		const zNear = 0.1;
-		const zFar = 100.0;
-		const projectionMatrix = mat4.create();
+		var fieldOfView = 90 * Math.PI / 180;
+		var aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
+		var zNear = 0.1;
+		var zFar = 100.0;
+		var projectionMatrix = mat4.create();
 
 
-		mat4.perspective(projectionMatrix,
-						fieldOfView,
-						aspect,
-						zNear,
-						zFar);
+		mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
-		const modelViewMatrix = mat4.create();
+		var modelViewMatrix = mat4.create();
 
-		mat4.translate(modelViewMatrix,
-						modelViewMatrix,
-						[0.0, 0.0, -5.0]);
-						
+		mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -5.0]);
+		
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uProjectionMatrix"), false, projectionMatrix);
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelViewMatrix"), false, modelViewMatrix);
 		
@@ -57,6 +53,7 @@ function Render(gl, vaoext)
 	
 	this.tick = function()
 	{
+		this.tickCount++;
 	}
 }
 
