@@ -1,10 +1,10 @@
-function Mesh(gl, vaoext, verts, texcords, indexs)
+function Mesh(gl, vaoext)
 {
 	this.gl = gl;
 	this.vaoext = vaoext;
-	this.verts = verts;
-	this.texcords = texcords;
-	this.indexs = indexs;
+	this.verts = [];
+	this.texcords = [];
+	this.indexs = [];
 	
 	this.vertexBuffer = null;
 	this.textureCordsBuffer = null;
@@ -12,6 +12,13 @@ function Mesh(gl, vaoext, verts, texcords, indexs)
 	
 	this.vao = null;
 	
+	this.add = function(verts, texcords, indexs)
+	{
+		this.verts = this.verts.concat(verts);
+		this.texcords = this.texcords.concat(texcords);
+		this.indexs = this.indexs.concat(indexs);
+	}
+
 	this.create = function(shaderProgram)
 	{
 		this.vao = this.vaoext.createVertexArrayOES();

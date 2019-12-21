@@ -5,7 +5,7 @@ function Render(gl, vaoext)
 	
 	this.shaderProgram = new ShaderProgram(this.gl, vsSource, fsSource);
 	
-	this.testMesh = new Mesh(this.gl, this.vaoext, [0.0, 0.5, 0.0, 0.5, -0.5, 0.0, -0.5, -0.5, 0.0,], [0, 0, 0, 0, 0, 0,], [0, 1, 2]);
+	this.testMesh = new Mesh(this.gl, this.vaoext);
 	
 	this.tickCount = 0;
 
@@ -18,6 +18,7 @@ function Render(gl, vaoext)
 		this.shaderProgram.addUniform("uProjectionMatrix");
 		this.shaderProgram.addUniform("uModelViewMatrix");
 		
+		this.testMesh.add([0.0, 0.5, 0.0, 0.5, -0.5, 0.0, -0.5, -0.5, 0.0,], [0, 0, 1, 0, 0, 1,], [0, 1, 2]);
 		this.testMesh.create(this.shaderProgram);
 	}
 	
@@ -34,7 +35,6 @@ function Render(gl, vaoext)
 		var zNear = 0.1;
 		var zFar = 100.0;
 		var projectionMatrix = mat4.create();
-
 
 		mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
