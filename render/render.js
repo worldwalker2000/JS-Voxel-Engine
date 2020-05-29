@@ -20,10 +20,16 @@ function Render(gl, vaoext)
 		this.shaderProgram.addUniform("uModelViewMatrix");
 		
 		//this.testMesh.add([0.0, 0.5, 0.0, 0.5, -0.5, 0.0, -0.5, -0.5, 0.0,], [0, 0, 1, 0, 0, 1,], [0, 1, 2]);
+		this.chunk.init();
 		this.testMesh.add(...this.chunk.buildMesh());
 		this.testMesh.create(this.shaderProgram);
 	}
-	this.rot = 0;
+
+	this.rotX = 0;
+	this.rotY = 0;
+	this.rotZ = 0;
+	this.rot = false;
+	
 	this.draw = function()
 	{
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -42,9 +48,19 @@ function Render(gl, vaoext)
 
 		let modelViewMatrix = glMatrix.mat4.create();
 
-		glMatrix.mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -5.0]);
-		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rot, [0.0, 1.0, 0.0]);
-		this.rot += 0.1;
+		glMatrix.mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -10.0]);
+
+		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rotX * Math.PI / 180, [1.0, 0.0, 0.0]);
+		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rotY * Math.PI / 180, [0.0, 1.0, 0.0]);
+		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rotZ * Math.PI / 180, [0.0, 0.0, 1.0]);
+		
+		if(this.rot)
+		{
+			this.rotX += 1;
+			this.rotY+= 1;
+			this.rotZ += 1;
+		}
+
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uProjectionMatrix"), false, projectionMatrix);
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelViewMatrix"), false, modelViewMatrix);
 		
