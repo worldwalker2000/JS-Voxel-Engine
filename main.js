@@ -1,9 +1,9 @@
-var canvas;
-var gl;
+let canvas;
+let gl;
 
-var refreshRate = 30;
+let refreshRate = 30;
 
-var render;
+let render;
 
 function tick()
 {
@@ -26,8 +26,8 @@ window.onload = function()
 		return;
 	}
 	
-	var oes_vao_ext = gl.getExtension('OES_vertex_array_object');
-	//var vao = oes_vao_ext.createVertexArrayOES();
+	let oes_vao_ext = gl.getExtension('OES_vertex_array_object');
+	//let vao = oes_vao_ext.createVertexArrayOES();
 	//oes_vao_ext.bindVertexArrayOES(vao);
 	
 	gl.clearColor(100/255, 149/255, 237/255, 1.0);

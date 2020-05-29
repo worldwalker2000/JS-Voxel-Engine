@@ -30,15 +30,15 @@ function Render(gl, vaoext)
 		
 		this.vaoext.bindVertexArrayOES(this.testMesh.vao);
 		
-		var fieldOfView = 90 * Math.PI / 180;
-		var aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
-		var zNear = 0.1;
-		var zFar = 100.0;
-		var projectionMatrix = mat4.create();
+		let fieldOfView = 90 * Math.PI / 180;
+		let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
+		let zNear = 0.1;
+		let zFar = 100.0;
+		let projectionMatrix = mat4.create();
 
 		mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
-		var modelViewMatrix = mat4.create();
+		let modelViewMatrix = mat4.create();
 
 		mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -5.0]);
 		

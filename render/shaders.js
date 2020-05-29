@@ -1,4 +1,4 @@
-var vsSource =
+let vsSource =
 "attribute vec3 aVertexPosition;" +
 "attribute vec2 aTextureCorrds;" +
 
@@ -15,7 +15,7 @@ var vsSource =
 	"vTextureCords = aTextureCorrds;" +
 "}";
 
-var fsSource =
+let fsSource =
 "varying lowp vec2 vTextureCords;" +
 
 "void main()" +
