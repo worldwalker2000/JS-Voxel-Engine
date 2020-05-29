@@ -45,4 +45,15 @@ function Mesh(gl, vaoext)
 		this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 		this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexs), this.gl.STATIC_DRAW);
 	}
+
+	this.destroy = function()
+	{
+		this.gl.deleteBuffer(this.vertexBuffer);
+		this.gl.deleteBuffer(this.textureCordsBuffer);
+		this.gl.deleteBuffer(this.indexBuffer);
+
+		this.verts.splice(0, this.verts.length);
+		this.texcords.splice(0, this.texcords.length);
+		this.indexs.splice(0, this.indexs.length);
+	}
 }
