@@ -18,6 +18,7 @@ function draw()
 window.onload = function()
 {
 	canvas = document.getElementById("glCanvas");
+
 	gl = canvas.getContext("webgl");
 	
 	if(!gl)
@@ -34,7 +35,9 @@ window.onload = function()
 	gl.clearDepth(1.0);
 	gl.enable(gl.DEPTH_TEST);
 	gl.depthFunc(gl.LEQUAL);
-	
+	gl.enable(gl.CULL_FACE);
+	gl.cullFace(gl.BACK);
+
 	render = new Render(gl, oes_vao_ext);
 	render.init();
 	
