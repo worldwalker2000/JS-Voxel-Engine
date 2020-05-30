@@ -76,7 +76,7 @@ function Render(gl, vaoext)
 		if(this.rot)
 		{
 			this.rotX += 1;
-			this.rotY+= 1;
+			this.rotY += 1;
 			this.rotZ += 1;
 		}
 	}
