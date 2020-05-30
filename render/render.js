@@ -35,8 +35,6 @@ function Render(gl, vaoext)
 	
 	this.draw = function()
 	{
-		this.player.tick();
-
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 		
 		this.gl.useProgram(this.shaderProgram.shaderProgram);
@@ -59,13 +57,6 @@ function Render(gl, vaoext)
 		glMatrix.mat4.rotate(modelMatrix, modelMatrix, this.rotY * Math.PI / 180, [0.0, 1.0, 0.0]);
 		glMatrix.mat4.rotate(modelMatrix, modelMatrix, this.rotZ * Math.PI / 180, [0.0, 0.0, 1.0]);
 		
-		if(this.rot)
-		{
-			this.rotX += 1;
-			this.rotY+= 1;
-			this.rotZ += 1;
-		}
-		
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uProjectionMatrix"), false, projectionMatrix);
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uViewMatrix"), false, this.player.getViewMatrix());
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelMatrix"), false, modelMatrix);
@@ -79,6 +70,15 @@ function Render(gl, vaoext)
 	this.tick = function()
 	{
 		this.tickCount++;
+
+		this.player.tick();
+
+		if(this.rot)
+		{
+			this.rotX += 1;
+			this.rotY+= 1;
+			this.rotZ += 1;
+		}
 	}
 }
 
