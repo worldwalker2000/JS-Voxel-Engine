@@ -13,7 +13,7 @@ function onMouseMove(evt) { instance.onMouseMove(evt); }
 function onMouseDown(evt) { instance.onMouseDown(evt); }
 function onMouseUp(evt) { instance.onMouseUp(evt); }
 
-function onKeyDown(evt) { instance.keys[evt.which] = true; console.log(evt.which); }
+function onKeyDown(evt) { instance.keys[evt.which] = true; }
 function onKeyUp(evt) { instance.keys[evt.which] = false; }
 
 function Player(pos, rot)

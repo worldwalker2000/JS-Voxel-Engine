@@ -5,8 +5,11 @@ function Render(gl, vaoext)
 	
 	this.shaderProgram = new ShaderProgram(this.gl, vsSource, fsSource);
 	
-	this.testMesh = new Mesh(this.gl, this.vaoext);
+	this.mesh = new Mesh(this.gl, this.vaoext);
 	this.chunk = new Chunk(0, 0);
+
+	this.mesh2 = new Mesh(this.gl, this.vaoext);
+	this.chunk2 = new Chunk(1, 0);
 
 	this.player = new Player([0, 0, -10], [0, 0, 0]);
 
@@ -22,10 +25,13 @@ function Render(gl, vaoext)
 		this.shaderProgram.addUniform("uModelMatrix");
 		this.shaderProgram.addUniform("uViewMatrix");
 		
-		//this.testMesh.add([0.0, 0.5, 0.0, 0.5, -0.5, 0.0, -0.5, -0.5, 0.0,], [0, 0, 1, 0, 0, 1,], [0, 1, 2]);
 		this.chunk.init();
-		this.testMesh.add(...this.chunk.buildMesh());
-		this.testMesh.create(this.shaderProgram);
+		this.mesh.add(...this.chunk.buildMesh());
+		this.mesh.create(this.shaderProgram);
+
+		this.chunk2.init();
+		this.mesh2.add(...this.chunk2.buildMesh());
+		this.mesh2.create(this.shaderProgram);
 	}
 
 	this.rotX = 0;
@@ -38,8 +44,6 @@ function Render(gl, vaoext)
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 		
 		this.gl.useProgram(this.shaderProgram.shaderProgram);
-		
-		this.vaoext.bindVertexArrayOES(this.testMesh.vao);
 		
 		let fieldOfView = 90 * Math.PI / 180;
 		let aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
@@ -64,7 +68,11 @@ function Render(gl, vaoext)
 		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aVertexPosition"));
 		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aTextureCorrds"));
 		
-		this.gl.drawElements(this.gl.TRIANGLES, this.testMesh.indexs.length, this.gl.UNSIGNED_SHORT, 0);
+		this.vaoext.bindVertexArrayOES(this.mesh.vao);
+		this.gl.drawElements(this.gl.TRIANGLES, this.mesh.indexs.length, this.gl.UNSIGNED_SHORT, 0);
+
+		this.vaoext.bindVertexArrayOES(this.mesh2.vao);
+		this.gl.drawElements(this.gl.TRIANGLES, this.mesh2.indexs.length, this.gl.UNSIGNED_SHORT, 0);
 	}
 	
 	this.tick = function()

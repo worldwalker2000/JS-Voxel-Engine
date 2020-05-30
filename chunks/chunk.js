@@ -3,10 +3,10 @@ const CHUNK_DEPTH = 10;
 const CHUNK_HEIGHT = 10;
 const CHUNK_ARRAY_SIZE = CHUNK_WIDTH * CHUNK_DEPTH * CHUNK_HEIGHT;
 
-function Chunk(x, y)
+function Chunk(x, z)
 {
     this.x = x;
-    this.y = y;
+    this.z = z;
     this.blocks = [];
 
     this.init = function()
@@ -35,9 +35,9 @@ function Chunk(x, y)
 
         for(let i = 0; i < 12; i+=3)
         {
-            newFace[i + 0] = face[i + 0] + pos[0] * BLOCK_SIZE;
+            newFace[i + 0] = face[i + 0] + (pos[0] * BLOCK_SIZE) + (this.x * CHUNK_WIDTH * BLOCK_SIZE);
             newFace[i + 1] = face[i + 1] + pos[1] * BLOCK_SIZE;
-            newFace[i + 2] = face[i + 2] + pos[2] * BLOCK_SIZE;
+            newFace[i + 2] = face[i + 2] + (pos[2] * BLOCK_SIZE) + (this.z * CHUNK_DEPTH * BLOCK_SIZE);
         }
 
         return newFace;
@@ -107,6 +107,9 @@ function Chunk(x, y)
                     }
                 }
 
+        console.log("Verts: " + verts.length);
+        console.log("Texcords: " + texcords.length);
+        console.log("Indexs: " + indexs.length);
         console.log("Faces: " + (index/4));
         return [verts, texcords, indexs];
     }
