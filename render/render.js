@@ -8,6 +8,8 @@ function Render(gl, vaoext)
 	this.testMesh = new Mesh(this.gl, this.vaoext);
 	this.chunk = new Chunk(0, 0);
 
+	this.player = new Player([0, 0, -10], [0, 0, 0]);
+
 	this.tickCount = 0;
 
 	this.init = function()
@@ -17,7 +19,8 @@ function Render(gl, vaoext)
 		this.shaderProgram.addAttribute("aTextureCorrds");
 		
 		this.shaderProgram.addUniform("uProjectionMatrix");
-		this.shaderProgram.addUniform("uModelViewMatrix");
+		this.shaderProgram.addUniform("uModelMatrix");
+		this.shaderProgram.addUniform("uViewMatrix");
 		
 		//this.testMesh.add([0.0, 0.5, 0.0, 0.5, -0.5, 0.0, -0.5, -0.5, 0.0,], [0, 0, 1, 0, 0, 1,], [0, 1, 2]);
 		this.chunk.init();
@@ -32,6 +35,8 @@ function Render(gl, vaoext)
 	
 	this.draw = function()
 	{
+		this.player.tick();
+
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 		
 		this.gl.useProgram(this.shaderProgram.shaderProgram);
@@ -46,13 +51,13 @@ function Render(gl, vaoext)
 
 		glMatrix.mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
-		let modelViewMatrix = glMatrix.mat4.create();
+		let modelMatrix = glMatrix.mat4.create();
 
-		glMatrix.mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -10.0]);
+		glMatrix.mat4.translate(modelMatrix, modelMatrix, [0.0, 0.0, 0.0]);
 
-		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rotX * Math.PI / 180, [1.0, 0.0, 0.0]);
-		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rotY * Math.PI / 180, [0.0, 1.0, 0.0]);
-		glMatrix.mat4.rotate(modelViewMatrix, modelViewMatrix, this.rotZ * Math.PI / 180, [0.0, 0.0, 1.0]);
+		glMatrix.mat4.rotate(modelMatrix, modelMatrix, this.rotX * Math.PI / 180, [1.0, 0.0, 0.0]);
+		glMatrix.mat4.rotate(modelMatrix, modelMatrix, this.rotY * Math.PI / 180, [0.0, 1.0, 0.0]);
+		glMatrix.mat4.rotate(modelMatrix, modelMatrix, this.rotZ * Math.PI / 180, [0.0, 0.0, 1.0]);
 		
 		if(this.rot)
 		{
@@ -60,9 +65,10 @@ function Render(gl, vaoext)
 			this.rotY+= 1;
 			this.rotZ += 1;
 		}
-
+		
 		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uProjectionMatrix"), false, projectionMatrix);
-		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelViewMatrix"), false, modelViewMatrix);
+		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uViewMatrix"), false, this.player.getViewMatrix());
+		this.gl.uniformMatrix4fv(this.shaderProgram.uniformLocations.get("uModelMatrix"), false, modelMatrix);
 		
 		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aVertexPosition"));
 		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aTextureCorrds"));
