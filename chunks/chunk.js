@@ -1,6 +1,6 @@
-const CHUNK_WIDTH = 10;
-const CHUNK_DEPTH = 10;
-const CHUNK_HEIGHT = 10;
+const CHUNK_WIDTH = 1;
+const CHUNK_DEPTH = 1;
+const CHUNK_HEIGHT = 1;
 const CHUNK_ARRAY_SIZE = CHUNK_WIDTH * CHUNK_DEPTH * CHUNK_HEIGHT;
 
 function Chunk(x, z)

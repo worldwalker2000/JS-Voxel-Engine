@@ -97,6 +97,13 @@ function Player(pos, rot)
         this.aabb.y = this.pos[1];
     }
 
+    this.moveToAabb = function()
+    {
+        this.pos[0] = this.aabb.x;
+        this.pos[1] = this.aabb.y;
+        this.pos[2] = this.aabb.z;
+    }
+
     this.getViewMatrix = function()
     {
         let viewMatrix = glMatrix.mat4.create();

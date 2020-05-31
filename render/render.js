@@ -70,6 +70,15 @@ function Render(gl, vaoext)
 		this.tickCount++;
 
 		this.player.tick();
+		for(let aabb of this.chunk.aabbs)
+			if(this.player.aabb.intersects(aabb))
+			{
+				this.player.aabb.yCollide(aabb);
+
+				this.player.aabb.xCollide(aabb);
+				this.player.aabb.zCollide(aabb);
+			}
+		this.player.moveToAabb();
 
 		if(this.rot)
 		{
