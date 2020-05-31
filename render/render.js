@@ -5,8 +5,7 @@ function Render(gl, vaoext)
 	
 	this.shaderProgram = new ShaderProgram(this.gl, vsSource, fsSource);
 	
-	this.mesh = new Mesh(this.gl, this.vaoext);
-	this.chunk = new Chunk(0, 0);
+	this.chunks = [];
 
 	this.player = new Player([0, 0, -10], [0, 0, 0]);
 
@@ -22,9 +21,32 @@ function Render(gl, vaoext)
 		this.shaderProgram.addUniform("uModelMatrix");
 		this.shaderProgram.addUniform("uViewMatrix");
 		
-		this.chunk.init();
-		this.mesh.add(...this.chunk.buildMesh());
-		this.mesh.create(this.shaderProgram);
+		for(let i = 0; i < 1; i++)
+			for(let j = 0; j < 1; j++)
+			{
+				let chunk = new FullChunk(i, j, gl, vaoext);
+				chunk.create(this.shaderProgram);
+				this.chunks.push(chunk);
+			}
+
+		document.addEventListener("keydown", (evt) =>
+		{
+			if(evt.key == '7')
+			{
+				setInterval(() =>
+				{
+					if(this.chunks.length < 10)
+					{
+						let x = Math.floor(Math.random() * 5);
+						let y = Math.floor(Math.random() * 5);
+		
+						let chunk = new FullChunk(x, y, gl, vaoext);
+						chunk.create(this.shaderProgram);
+						this.chunks.push(chunk);
+					}
+				}, 1000);
+			}
+		});
 	}
 
 	this.rotX = 0;
@@ -61,8 +83,8 @@ function Render(gl, vaoext)
 		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aVertexPosition"));
 		this.gl.enableVertexAttribArray(this.shaderProgram.attributeLocations.get("aTextureCorrds"));
 		
-		this.vaoext.bindVertexArrayOES(this.mesh.vao);
-		this.gl.drawElements(this.gl.TRIANGLES, this.mesh.indexs.length, this.gl.UNSIGNED_SHORT, 0);
+		for(let chunk of this.chunks)
+			chunk.render();
 	}
 	
 	this.tick = function()
@@ -70,15 +92,6 @@ function Render(gl, vaoext)
 		this.tickCount++;
 
 		this.player.tick();
-		for(let aabb of this.chunk.aabbs)
-			if(this.player.aabb.intersects(aabb))
-			{
-				this.player.aabb.yCollide(aabb);
-
-				this.player.aabb.xCollide(aabb);
-				this.player.aabb.zCollide(aabb);
-			}
-		this.player.moveToAabb();
 
 		if(this.rot)
 		{

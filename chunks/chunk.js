@@ -1,6 +1,6 @@
-const CHUNK_WIDTH = 1;
-const CHUNK_DEPTH = 1;
-const CHUNK_HEIGHT = 1;
+const CHUNK_WIDTH = 10;
+const CHUNK_DEPTH = 10;
+const CHUNK_HEIGHT = 10;
 const CHUNK_ARRAY_SIZE = CHUNK_WIDTH * CHUNK_DEPTH * CHUNK_HEIGHT;
 
 function Chunk(x, z)
@@ -8,7 +8,6 @@ function Chunk(x, z)
     this.x = x;
     this.z = z;
     this.blocks = [];
-    this.aabbs = [];
 
     this.init = function()
     {
@@ -19,7 +18,6 @@ function Chunk(x, z)
                 for(let y = 0; y < CHUNK_HEIGHT; y++)
                 {
                     this.blocks[x + CHUNK_WIDTH * (y + CHUNK_HEIGHT * z)] = Math.random() < 0.5;
-                    this.aabbs[x + CHUNK_WIDTH * (y + CHUNK_HEIGHT * z)] = new Aabb(x, z, y, 1, 1, 1);
                 }
 
     }
