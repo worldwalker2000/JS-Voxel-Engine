@@ -21,6 +21,8 @@ function Player(pos, rot)
     this.pos = pos;
     this.rot = rot;
 
+    this.aabb = new Aabb(0, 0, 0, 1, 1, 1);
+
     this.prev = [0, 0];
 
     this.keys = [];
@@ -89,6 +91,10 @@ function Player(pos, rot)
 
         if(this.keys[32]) this.pos[1] -= speed;
         if(this.keys[16]) this.pos[1] += speed;
+
+        this.aabb.x = this.pos[0];
+        this.aabb.z = this.pos[2];
+        this.aabb.y = this.pos[1];
     }
 
     this.getViewMatrix = function()

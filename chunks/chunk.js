@@ -8,11 +8,20 @@ function Chunk(x, z)
     this.x = x;
     this.z = z;
     this.blocks = [];
+    this.aabbs = [];
 
     this.init = function()
     {
-        for(let i = 0; i < CHUNK_ARRAY_SIZE; i++)
-            this.blocks[i] = Math.random() < 0.5;
+        //for(let i = 0; i < CHUNK_ARRAY_SIZE; i++)
+        //    this.blocks[i] = Math.random() < 0.5;
+        for(let x = 0; x < CHUNK_WIDTH; x++)
+            for(let z = 0; z < CHUNK_DEPTH; z++)
+                for(let y = 0; y < CHUNK_HEIGHT; y++)
+                {
+                    this.blocks[x + CHUNK_WIDTH * (y + CHUNK_HEIGHT * z)] = Math.random() < 0.5;
+                    this.aabbs[x + CHUNK_WIDTH * (y + CHUNK_HEIGHT * z)] = new Aabb(x, z, y, 1, 1, 1);
+                }
+
     }
 
     this.setBlock = function(x, y, z, value)

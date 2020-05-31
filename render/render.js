@@ -8,9 +8,6 @@ function Render(gl, vaoext)
 	this.mesh = new Mesh(this.gl, this.vaoext);
 	this.chunk = new Chunk(0, 0);
 
-	this.mesh2 = new Mesh(this.gl, this.vaoext);
-	this.chunk2 = new Chunk(1, 0);
-
 	this.player = new Player([0, 0, -10], [0, 0, 0]);
 
 	this.tickCount = 0;
@@ -28,10 +25,6 @@ function Render(gl, vaoext)
 		this.chunk.init();
 		this.mesh.add(...this.chunk.buildMesh());
 		this.mesh.create(this.shaderProgram);
-
-		this.chunk2.init();
-		this.mesh2.add(...this.chunk2.buildMesh());
-		this.mesh2.create(this.shaderProgram);
 	}
 
 	this.rotX = 0;
@@ -70,9 +63,6 @@ function Render(gl, vaoext)
 		
 		this.vaoext.bindVertexArrayOES(this.mesh.vao);
 		this.gl.drawElements(this.gl.TRIANGLES, this.mesh.indexs.length, this.gl.UNSIGNED_SHORT, 0);
-
-		this.vaoext.bindVertexArrayOES(this.mesh2.vao);
-		this.gl.drawElements(this.gl.TRIANGLES, this.mesh2.indexs.length, this.gl.UNSIGNED_SHORT, 0);
 	}
 	
 	this.tick = function()
