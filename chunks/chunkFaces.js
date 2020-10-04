@@ -1,3 +1,4 @@
+// Chunk faces copied from https://github.com/Hopson97/HopsonCraft/blob/master/Source/World/Chunk/MeshBuilder.cpp and converted to JS
 const BLOCK_SIZE = 1;
 
 const frontFace = 
