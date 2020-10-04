@@ -1,25 +1,25 @@
 let vsSource =
-"attribute vec3 aVertexPosition;" +
-"attribute vec2 aTextureCorrds;" +
+	"attribute vec3 aVertexPosition;" +
+	"attribute vec2 aTextureCorrds;" +
 
-"uniform mat4 uModelMatrix;" +
-"uniform mat4 uViewMatrix;" +
-"uniform mat4 uProjectionMatrix;" +
+	"uniform mat4 uModelMatrix;" +
+	"uniform mat4 uViewMatrix;" +
+	"uniform mat4 uProjectionMatrix;" +
 
-"varying lowp vec2 vTextureCords;" +
+	"varying lowp vec2 vTextureCords;" +
 
-"void main()" +
-"{" +
+	"void main()" +
+	"{" +
 	"gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 1.0);" +
 	//"gl_Position = vec4(aVertexPosition, 1.0);" +
 	//"gl_Position = vec4(0.0, 0.0, -1.0, 1.0);" +
 	"vTextureCords = aTextureCorrds;" +
-"}";
+	"}";
 
 let fsSource =
-"varying lowp vec2 vTextureCords;" +
+	"varying lowp vec2 vTextureCords;" +
 
-"void main()" +
-"{" +
+	"void main()" +
+	"{" +
 	"gl_FragColor = vec4(vTextureCords, 0.5, 1.0);" +
-"}";
+	"}";
