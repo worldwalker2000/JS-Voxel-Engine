@@ -67,7 +67,7 @@ function Player(pos, rot)
 
     this.tick = function()
     {
-        let speed = 0.1;
+        let speed = 0.2;
         if(this.keys[87])
         {
             this.pos[0] += Math.sin(-this.rot[1] * Math.PI / 180) * speed;
