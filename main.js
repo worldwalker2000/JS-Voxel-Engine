@@ -15,7 +15,7 @@ function draw()
 	render.draw();
 }
 
-window.onload = function ()
+window.onload = () =>
 {
 	canvas = document.getElementById("glCanvas");
 

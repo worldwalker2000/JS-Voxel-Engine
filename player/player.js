@@ -40,7 +40,7 @@ function Player(pos, rot)
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyUp);
 
-    this.onMouseMove = function (evt)
+    this.onMouseMove = (evt) =>
     {
         let mousePos = getMousePos(document.getElementById("glCanvas"), evt);
 
@@ -55,17 +55,17 @@ function Player(pos, rot)
         this.prev[1] = mousePos[1];
     }
 
-    this.onMouseDown = function (evt)
+    this.onMouseDown = (evt) =>
     {
         this.isMouseDown = true;
     }
 
-    this.onMouseUp = function (evt)
+    this.onMouseUp = (evt) =>
     {
         this.isMouseDown = false;
     }
 
-    this.tick = function ()
+    this.tick = () =>
     {
         let speed = 0.2;
         if (this.keys[87])
@@ -97,14 +97,14 @@ function Player(pos, rot)
         this.aabb.y = this.pos[1];
     }
 
-    this.moveToAabb = function ()
+    this.moveToAabb = () =>
     {
         this.pos[0] = this.aabb.x;
         this.pos[1] = this.aabb.y;
         this.pos[2] = this.aabb.z;
     }
 
-    this.getViewMatrix = function ()
+    this.getViewMatrix = () =>
     {
         let viewMatrix = glMatrix.mat4.create();
         glMatrix.mat4.rotate(viewMatrix, viewMatrix, rot[0] * Math.PI / 180, [1.0, 0.0, 0.0]);

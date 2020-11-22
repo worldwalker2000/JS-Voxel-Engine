@@ -11,7 +11,7 @@ function Render(gl, vaoext)
 
 	this.tickCount = 0;
 
-	this.init = function ()
+	this.init = () =>
 	{
 		this.shaderProgram.create();
 		this.shaderProgram.addAttribute("aVertexPosition");
@@ -54,7 +54,7 @@ function Render(gl, vaoext)
 	this.rotZ = 0;
 	this.rot = false;
 
-	this.draw = function ()
+	this.draw = () =>
 	{
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
@@ -87,7 +87,7 @@ function Render(gl, vaoext)
 			chunk.render();
 	}
 
-	this.tick = function ()
+	this.tick = () =>
 	{
 		this.tickCount++;
 

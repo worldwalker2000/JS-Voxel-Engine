@@ -9,7 +9,7 @@ function Chunk(x, z)
     this.z = z;
     this.blocks = [];
 
-    this.init = function ()
+    this.init = () =>
     {
         //for(let i = 0; i < CHUNK_ARRAY_SIZE; i++)
         //    this.blocks[i] = Math.random() < 0.5;
@@ -22,12 +22,12 @@ function Chunk(x, z)
 
     }
 
-    this.setBlock = function (x, y, z, value)
+    this.setBlock = (x, y, z, value) =>
     {
         this.blocks[x + CHUNK_WIDTH * (y + CHUNK_HEIGHT * z)] = value;
     }
 
-    this.getBlock = function (x, y, z)
+    this.getBlock = (x, y, z) =>
     {
         if (x >= CHUNK_WIDTH || x < 0) return false;
         if (y >= CHUNK_HEIGHT || y < 0) return false;
@@ -36,7 +36,7 @@ function Chunk(x, z)
         return this.blocks[x + CHUNK_WIDTH * (y + CHUNK_HEIGHT * z)];
     }
 
-    this.moveFace = function (face, pos)
+    this.moveFace = (face, pos) =>
     {
         let newFace = face.slice();
 
@@ -50,7 +50,7 @@ function Chunk(x, z)
         return newFace;
     }
 
-    this.buildMesh = function ()
+    this.buildMesh = () =>
     {
         let verts = [];
         let texcords = [];

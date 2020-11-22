@@ -5,7 +5,7 @@ function Shader(gl, src, type)
 	this.type = type;
 	this.shader = null;
 
-	this.create = function ()
+	this.create = () =>
 	{
 		this.shader = this.gl.createShader(this.type);
 		this.gl.shaderSource(this.shader, this.src);

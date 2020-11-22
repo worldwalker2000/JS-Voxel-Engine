@@ -13,7 +13,7 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 	this.attributeLocations = new Map();
 	this.uniformLocations = new Map();
 
-	this.create = function ()
+	this.create = () =>
 	{
 		this.vertexShader = new Shader(this.gl, this.vertexShaderCode, this.gl.VERTEX_SHADER);
 		this.fragmentShader = new Shader(this.gl, this.fragmentShaderCode, this.gl.FRAGMENT_SHADER);
@@ -33,12 +33,12 @@ function ShaderProgram(gl, vertexShaderCode, fragmentShaderCode)
 		}
 	}
 
-	this.addAttribute = function (name)
+	this.addAttribute = (name) =>
 	{
 		this.attributeLocations.set(name, this.gl.getAttribLocation(this.shaderProgram, name));
 	}
 
-	this.addUniform = function (name)
+	this.addUniform = (name) =>
 	{
 		this.uniformLocations.set(name, this.gl.getUniformLocation(this.shaderProgram, name));
 	}
