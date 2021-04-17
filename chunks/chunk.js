@@ -50,6 +50,7 @@ function Chunk(x, z)
         return newFace;
     }
 
+    // This is adapted from https://github.com/Hopson97/HopsonCraft/blob/master/Source/World/Chunk/Mesh.cpp
     this.buildMesh = () =>
     {
         let verts = [];
